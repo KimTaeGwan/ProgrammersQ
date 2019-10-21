@@ -2,21 +2,26 @@
 
 #input
 n = 4
-costs = [[0,1,1],
-         [2,3,1],
-         [1,2,2]]
-#return: 12
+costs = [[0,1,1],[0,2,2],[1,2,5],[1,3,1],[2,3,8]]  
+#return:
 
 #solution
 answer = 0
-T = set()
+edge = 0
+G = [i for i in range(n)]
 costs = sorted(costs, key = lambda element: element[2])
+print(costs)
 for cost in costs:
-    if len(T) == n:
+    if edge == n-1:
         break
-    if (cost[0] not in T) or (cost[1] not in T):
-        T.add(cost[0])
-        T.add(cost[1])
+    if G[cost[0]] != G[cost[1]]:
+        if cost[0] > cost[1]:
+            G[cost[0]] = G[cost[1]]
+        else:
+            G[cost[1]] = G[cost[0]]
+        print(G)
         answer += cost[2]
+        edge+=1
         
-#정확성: 25
+#정확성: 50
+    

@@ -3,22 +3,20 @@
 #input
 n = 4
 costs = [[0,1,1],
-         [0,2,2],
-         [1,2,5],
-         [1,3,1],
-         [2,3,8]]
-#return: 4
+         [2,3,1],
+         [1,2,2]]
+#return: 12
 
 #solution
-
 answer = 0
-
-for i in range(n-1):
-    Min = costs[0]
-    for cost in costs:
-        if Min[2] > cost[2]:
-           Min = cost
-    answer += Min[2]
-    costs.remove(Min)
-
-#정확성: 37.5 
+T = set()
+costs = sorted(costs, key = lambda element: element[2])
+for cost in costs:
+    if len(T) == n:
+        break
+    if (cost[0] not in T) or (cost[1] not in T):
+        T.add(cost[0])
+        T.add(cost[1])
+        answer += cost[2]
+        
+#정확성: 25
